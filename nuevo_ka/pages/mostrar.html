@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Quieres ser mi novia?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #e91e63;
+      color: white;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      z-index: 2;
+    }
+
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      z-index: 2;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      background-color: #880e4f;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ad1457;
+    }
+
+    #no {
+      position: absolute;
+    }
+
+    /* Fondo de corazones animados */
+    .corazones {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+
+    .corazones span {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+      animation: corazonesAnim 10s linear infinite;
+    }
+
+    @keyframes corazonesAnim {
+      0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      button {
+        font-size: 16px;
+        padding: 10px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="corazones" id="corazones"></div>
+
+  <h1>¿Quieres ser mi cómplice en esta aventura llamada vida?</h1>
+
+  <div class="botones">
+    <button onclick="aceptar()">Sí ❤️</button>
+    <button id="no" onmouseover="moverBoton()">No 😅</button>
+  </div>
+
+  <script>
+    // Generar corazones
+    const contenedor = document.getElementById("corazones");
+    for (let i = 0; i < 30; i++) {
+      let span = document.createElement("span");
+      span.style.left = `${Math.random() * 100}%`;
+      span.style.animationDuration = `${5 + Math.random() * 5}s`;
+      span.style.top = `${100 + Math.random() * 100}px`;
+      contenedor.appendChild(span);
+    }
+
+    // Botón que se escapa
+    function moverBoton() {
+      const boton = document.getElementById("no");
+      const maxX = window.innerWidth - boton.offsetWidth;
+      const maxY = window.innerHeight - boton.offsetHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      boton.style.left = `${x}px`;
+      boton.style.top = `${y}px`;
+    }
+
+    // Al hacer clic en "Sí"
+    function aceptar() {
+      document.body.innerHTML = `
+        <div class="corazones" id="corazones"></div>
+        <h1 style="z-index:2;">¡Sabía que dirías que sí! 💕<br>jjjjj</h1>
+      `;
+    }
+  </script>
+
+</body>
+</html>
